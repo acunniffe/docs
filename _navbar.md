@@ -1,0 +1,2 @@
+- [Back to Homepage](https://useoptic.com)
+- [Login to Optic](https://app.useoptic.com/#/login)
