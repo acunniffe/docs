@@ -35,15 +35,8 @@
 		plugins: [
 			function (hook, vm) {
 				hook.beforeEach(function (html) {
-					if (/useoptic\.com/.test(vm.route.file)) {
-						url = vm.route.file
-							.replace('useoptic.com', 'github.com')
-							.replace(/\/master/, '/edit/master')
-					} else {
-						url = 'https://github.com/opticdev/docs/edit/master/' + vm.route.file
-					}
 
-					debugger
+                    var url = 'https://github.com/opticdev/docs/edit/master/' + vm.route.file
 					var editHtml = "<div style='text-align: right'><a href='"+url+"'>Edit on GitHub</a></div>\n\n"
 
 					return editHtml
