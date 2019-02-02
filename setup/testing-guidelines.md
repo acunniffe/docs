@@ -18,18 +18,9 @@ host: localhost
 port: 3001
 ```
 
-Here's an example of a fixture for Node.js that uses supertest for testing:
-```javascript
-import supertestRequest from 'supertest'
-const opticWatching = process.env['optic-watching']
-export const request = (opticWatching) ? 
-                       supertestRequest('http://localhost:30333') : 
-                       supertestRequest('http://localhost:3001')
-```
+You can see example [test fixtures for your stack here.](example-fixtures/index.md) 
 
-There are other examples available on our GitHub. If you create a pull request to add an example for a new language / framework, we'll send you a $40 Amazon Gift Card as a thank you from the Optic community.
-
-If you need help getting your tests connected to Optic, reach out to us on Intercom (bottom right of the screen) or email support@useoptic.com 
+If you need help getting your tests connected to Optic, reach out to us on Drift (bottom right of the screen) or email support@useoptic.com 
 
 ## What to Test
 In addition to giving you confidence in your code, you can think of your tests as providing the dataset Optic uses to write your API Spec. It's likely that your tests already have good coverage of your APIs functionality, but in the event they do not, here are some guidelines that will help you write better tests & get a complete API Spec from Optic:
