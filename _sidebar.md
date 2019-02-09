@@ -1,5 +1,4 @@
-- Getting started
-
+- [**Getting started**](README.md)
   - [Installation](setup/install.md)
   - [Adding APIs](setup/adding-apis.md)
   - [API Configuration](setup/project-setup.md)
@@ -7,7 +6,9 @@
   - [Publishing Snapshots](setup/publishing-snapshots.md)
   - [Authentication Schemes](setup/authentication.md)
   
-- Example Test Fixtures
-  - [**Contributing Example Fixtures**](example-fixtures/contributing.md)
+- [**Example Test Fixtures**](example-fixtures/index.md)
+  - [Contributing Example Fixtures](example-fixtures/contributing.md)
   - Node JS
     - [Express - Supertest](example-fixtures/node/express-js/supertest.md)
+  - Scala
+    - [Akka HTTP - Route TestKit](example-fixtures/scala/akka-http/routetestkit.md)

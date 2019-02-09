@@ -52,6 +52,8 @@
 <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-scala.min.js"></script>
 
 <script type="text/javascript">
 
@@ -77,6 +79,9 @@
 	}();
 	drift.SNIPPET_VERSION = '0.3.1';
 	drift.load('bikd3yp2wkda');
+	drift.on('ready',function(api, payload) {
+		drift.config({enableWelcomeMessage: false})
+	})
 
 </script>
 
