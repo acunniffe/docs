@@ -12,3 +12,5 @@
     - [Express - Supertest](example-fixtures/node/express-js/supertest.md)
   - Scala
     - [Akka HTTP - Route TestKit](example-fixtures/scala/akka-http/routetestkit.md)
+  - Ruby
+    - [Rails/Rack - All Testing Frameworks](example-fixtures/ruby/using-rack.md)
