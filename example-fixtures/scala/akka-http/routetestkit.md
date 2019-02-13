@@ -40,8 +40,7 @@ object OpticFixture {
   def withOptic(route: akka.http.scaladsl.server.Route): Route = {
     import akka.http.scaladsl.server.directives.{DebuggingDirectives, LoggingMagnet}
     if (sys.env.contains("optic-watching")) 
-        DebuggingDirectives.logRequestResult
-            (LoggingMagnet(_ => logRequestAndResponse))(route)
+        DebuggingDirectives.logRequestResult(LoggingMagnet(_ => logRequestAndResponse))(route)
     else route
   }
 
