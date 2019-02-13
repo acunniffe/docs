@@ -59,10 +59,10 @@ object OpticFixture {
         Http().singleRequest(request).foreach(i => {
           //A 'requestId' is sent back in the request body
           Unmarshal(i.entity).to[String].foreach(requestId => {
-            //The response is forwarded to :{response logging port}/response/:requestId
+            //The response is forwarded to :{response logging port}/response/:requestId/:statusCode
             HttpRequest(
               HttpMethods.POST,
-              Uri("/response/" + requestId),
+              Uri("/response/" + requestId + "/" + response.status.intValue().toString),
               response.headers,
               HttpEntity.apply(response.entity.contentType, response.entity.dataBytes),
               response.protocol
