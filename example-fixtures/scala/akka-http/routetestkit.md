@@ -13,16 +13,15 @@ it("/hello responds with 'World!'") {
 Route TestKit doesn't actually stand up a mock server, instead it injects mock requests directly into the Route handlers. So instead of using the Optic proxy, we need to collect the request + response for each test we run and forward them to Optic. Akka's [Logging Directives](https://doc.akka.io/docs/akka-http/current/routing-dsl/directives/debugging-directives/logRequest.html) make it easy to create a simple test fixture that does just that.
 
 ## Proxy Fixture
-Add a new file in your `test/scala` folder called `OpticFixture.scala`. We suggest using `com/useoptic/akkahttp` to separate it from your code. 
+Add a new file in your `test/scala` folder called `OpticFixture.scala`. We suggest using `com/useoptic/akkahttp` to separate it from your code.
 
-The fixture will check for the `optic-watching` flag and, if present, log your test requests/responses to Optic. If the flag is not present, your tests will run normally.
+The fixture will check for the `OPTIC_SERVER_LISTENING` environment flag and, if present, log your test requests/responses to Optic. If the flag is not present, your tests will run normally.
 
 Review, and then copy this fixture into `OpticFixture.scala`
 
 ```scala
 package com.useoptic.akkahttp
 
-//Importing Classes for Buidling HTTP Request/Response
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
@@ -35,19 +34,19 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object OpticFixture {
 
-  //If 'optic-watching' enviroment flag is set
+  //If 'OPTIC_SERVER_LISTENING' enviroment flag is set
   //this method wraps a 'Route' instance with a logging directive that forwards data to Optic
   def withOptic(route: akka.http.scaladsl.server.Route): Route = {
     import akka.http.scaladsl.server.directives.{DebuggingDirectives, LoggingMagnet}
-    if (sys.env.contains("optic-watching")) 
-        DebuggingDirectives.logRequestResult
-            (LoggingMagnet(_ => logRequestAndResponse))(route)
+    if (sys.env.contains("OPTIC_SERVER_LISTENING"))
+      DebuggingDirectives.logRequestResult(LoggingMagnet(_ => logRequestAndResponse))(route)
     else route
   }
 
-  //Standard Configuration for the Optic Proxy Server 
-  private val requestLoggingEndpointPort = Host("localhost", 30334)
-  private val responseLoggingEndpointPort = Host("localhost", 30335)
+  //Standard Configuration for the Optic Proxy Server
+  def forwardToRequestLogging(request: HttpRequest) = request.withUri(request.uri.withHost("localhost").withPort(30334).withScheme("http"))
+  def forwardToResponseLogging(request: HttpRequest) = request.withUri(request.uri.withHost("localhost").withPort(30335).withScheme("http"))
+
   private implicit val testActorSystem = ActorSystem("optic-proxy-routing")
   private implicit val materializer = ActorMaterializer()
 
@@ -55,19 +54,21 @@ object OpticFixture {
   private def logRequestAndResponse(request: HttpRequest)(res: RouteResult): Unit = {
     res match {
       case Complete(response) => {
-        request.withEffectiveUri(false, requestLoggingEndpointPort)
+        val updatedRequest = forwardToRequestLogging(request)
+
         //Requests are forwarded to the request logging port
-        Http().singleRequest(request).foreach(i => {
-          //A 'requestId' is sent back in the request body
-          Unmarshal(i.entity).to[String].foreach(requestId => {
-            //The response is forwarded to :{response logging port}/response/:requestId
-            HttpRequest(
+        Http().singleRequest(updatedRequest).foreach(i => {
+          //A 'interactionId' is sent back in the request body
+          Unmarshal(i.entity).to[String].foreach(interactionId => {
+            //The response is forwarded to :{response logging port}/response/:interactionId/:statusCode
+            val a = Http().singleRequest(forwardToResponseLogging(HttpRequest(
               HttpMethods.POST,
-              Uri("/response/" + requestId),
+              Uri("/interaction/" + interactionId + "/status/" + response.status.intValue().toString),
               response.headers,
               HttpEntity.apply(response.entity.contentType, response.entity.dataBytes),
               response.protocol
-            ).withEffectiveUri(false, responseLoggingEndpointPort)
+            )))
+
           })
         })
       }

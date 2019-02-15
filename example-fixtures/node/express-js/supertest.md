@@ -12,11 +12,11 @@ request(app)
 To use Supertest with Optic, we need to create a simple test fixture that directs traffic from Supertest to the Optic Proxy. 
 
 ## Proxy Fixture
-Create a new file called `OpticTestFixture.js`. This fixture will check for the `optic-watching` flag and, if present, route all your test traffic through the proxy. If the flag is not set, your tests will run normally.
+Create a new file called `OpticTestFixture.js`. This fixture will check for the `OPTIC_SERVER_LISTENING` flag and, if present, route all your test traffic through the proxy. If the flag is not set, your tests will run normally.
 
 1. **Dependencies** - This fixture requires the `express`, `request` packages.
-2. **Optic Proxy Config** - Checks for `optic-watching` flag, sets the location of your local Optic Proxy (always localhost:30333)
-3. **withOptic Wrapper** -- Wraps your Express App for use with Supertest. If `optic-watching` is present all traffic will be routed through the proxy to a mock server. The function takes two arguments, your Express App and the test port from your `optic.yaml` file. 
+2. **Optic Proxy Config** - Checks for `OPTIC_SERVER_LISTENING` flag, sets the location of your local Optic Proxy (always localhost:30333)
+3. **withOptic Wrapper** -- Wraps your Express App for use with Supertest. If `OPTIC_SERVER_LISTENING` is present all traffic will be routed through the proxy to a mock server. The function takes two arguments, your Express App and the test port from your `optic.yaml` file. 
 
 ```javascript
 //1 Dependencies 
@@ -24,7 +24,7 @@ import express from 'express'
 import request from 'request'
 
 //2 Optic Proxy Config
-const opticWatching = !!process.env['optic-watching']
+const opticWatching = !!process.env['OPTIC_SERVER_LISTENING']
 const opticProxyAddress = 'http://localhost:30333';
 
 //3 withOptic Wrapper

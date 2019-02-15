@@ -9,7 +9,7 @@ With these considerations in mind -- tests emerged as the best candidate to give
 When you run your tests through Optic, it starts a local proxy server that stands between your tests and your mock API. The proxy logs the request/response of every interaction with your API and uses that real-world data to document the API. Since Optic API Specs are based on real data there's no chance of them being inaccurate or falling behind -- they will document the behavior of your API as it is -- not as you expect it to be. Using Optic has led many teams to discover unexpected behavior (some benign, some risky) allowed by their APIs, but not included in their previous API documentation.  
 
 ## Connecting your Tests to the Proxy  
-When you run your tests through Optic there will be an environment variable present called 'optic-watching'. Your test fixture should be adapted to forward your requests to the Optic Proxy whenever that environment variable is present. 
+When you run your tests through Optic there will be an environment variable present called 'OPTIC_SERVER_LISTENING'. Your test fixture should be adapted to forward your requests to the Optic Proxy whenever that environment variable is present. 
 
 The Optic proxy always runs on **localhost:30333** so you'll need to redirect traffic there whenever Optic is watching your project. The proxy will forward your requests back to your mock API based on the entry in your 'optic.yml' file:
 

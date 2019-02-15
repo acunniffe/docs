@@ -67,12 +67,12 @@ module OpticTestFixture
 
       logging_request_response.code
       # Save the ID Optic assigns this request
-      requestId = logging_request_response.body || ""
+      interactionId = logging_request_response.body || ""
 
       # Log Response to Optic
       resStatus, resHeaders, resBody = res
 
-      logging_response = Net::HTTP.const_get("Post").new("/request/" + requestId + "/status/" + resStatus.to_s)
+      logging_response = Net::HTTP.const_get("Post").new("/interaction/" + interactionId + "/status/" + resStatus.to_s)
       addHeaders(resHeaders, logging_response)
       if logging_response.request_body_permitted? && resBody
         bodyData = resBody.body()
@@ -100,8 +100,8 @@ Now add the middleware to your Rack configuration, in a Rails app it's best to d
 Rails.application.configure do {
   # All your current configuration settings...
   
-  # The Documenting middleware. Only used if 'optic-watching' flag is found in ENV. 
-  if ENV['optic-watching']
+  # The Documenting middleware. Only used if 'OPTIC_SERVER_LISTENING' flag is found in ENV. 
+  if ENV['OPTIC_SERVER_LISTENING']
     config.middleware.use OpticTestFixture::DocumentingMiddleware
   end
 }
