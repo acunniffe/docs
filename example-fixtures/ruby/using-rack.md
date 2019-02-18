@@ -1,4 +1,7 @@
 # Using Optic with Rails/Rack Application
+
+> Requires **strategy: logging** in optic.yml
+
 > Tested against [Rails](https://expressjs.com/) 2.3, 2.4, 2.5
 
 ## Optic Proxy Setup
@@ -72,7 +75,7 @@ module OpticTestFixture
       # Log Response to Optic
       resStatus, resHeaders, resBody = res
 
-      logging_response = Net::HTTP.const_get("Post").new("/interaction/" + interactionId + "/status/" + resStatus.to_s)
+      logging_response = Net::HTTP.const_get("Post").new("/interactions/" + interactionId + "/status/" + resStatus.to_s)
       addHeaders(resHeaders, logging_response)
       if logging_response.request_body_permitted? && resBody
         bodyData = resBody.body()

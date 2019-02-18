@@ -1,23 +1,27 @@
 # Publishing Snapshots
-Optic analyses your API and creates an API Spec (convertible to Swagger, RAML or API Blueprint) describing each endpoints and model. Each of these specs is uploaded as a 'snapshot' of your API at its current state of development.
+By observing the behavior of your API, Optic can discover contract for your API. These contracts are uploaded to Optic as a 'snapshot' of your API at its current state of development.
 
+> Optic uses ${API_REPO_ROOT_DIRECTORY}/.optic to log its observations about your API. Please should add this directory to your `.gitignore` so your git history remains clean. 
 
-## Staging Draft APIs
-Before publishing a snapshot you can review the API Spec to make sure it's correct. To create and upload a draft of your API Spec run the `stage` command. Team members are not notified about changes in draft snapshots -- this command is safe and is strictly for testing/debugging. 
+## Documenting API
+To document your API, set your working directory to the root directory of your API and run: 
 ```bash
-cd /path/to/repo # should contain optic.yaml
-optic stage
-``` 
+optic api:document
+Collecting API Interactions:...
+I observed 52 API interactions!
+Generating reports...... Done!
+```
 
+Optic will run your tests and observe the behavior of your API. These leanings will be saved to `.optic/observations.json`. 
 
 ## Publishing 
-When you are ready to actually publish a new version of your API to Optic run: 
+When you are ready to publish a new version of your API to Optic run: 
 ```bash
-cd /path/to/repo # should contain optic.yaml
+optic api:publish
 optic publish
 ``` 
 
-Your snapshot will be named after the current Git branch / commit, and because published snapshots are immutable, the CLI will not allow you to publish if your project's Git repo is dirty. 
+The snapshot will be named after the current Git branch / commit. If you want to preview the API docs on Optic without publishing, pass the `--draft` flag to the publish coommand.  
 
 Once published: 
 - Team members who have subscribed to this API will get notified of important changes

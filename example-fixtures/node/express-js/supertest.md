@@ -1,4 +1,7 @@
 # Using Optic with Express JS and Supertest
+
+> Requires **strategy: proxy** in optic.yml
+
 > Tested against [Express](https://expressjs.com/) 4.x & [Supertest](https://github.com/visionmedia/supertest#readme) 3.x
 
 ## Optic Proxy Setup

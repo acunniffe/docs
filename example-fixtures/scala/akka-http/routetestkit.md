@@ -1,6 +1,7 @@
 # Using Optic with Akka HTTP & Route TestKit
-> Tested against [Akka HTTP](https://doc.akka.io/docs/akka-http/current/) 10.x.x
+> Requires **strategy: logging** in optic.yml
 
+> Tested against [Akka HTTP](https://doc.akka.io/docs/akka-http/current/) 10.x.x
 ## Optic Proxy Setup
 The Akka Route TestKit provides a DSL for injecting requests into your routes and making assertions about the responses.
 ```scala
@@ -63,7 +64,7 @@ object OpticFixture {
             //The response is forwarded to :{response logging port}/response/:interactionId/:statusCode
             val a = Http().singleRequest(forwardToResponseLogging(HttpRequest(
               HttpMethods.POST,
-              Uri("/interaction/" + interactionId + "/status/" + response.status.intValue().toString),
+              Uri("/interactions/" + interactionId + "/status/" + response.status.intValue().toString),
               response.headers,
               HttpEntity.apply(response.entity.contentType, response.entity.dataBytes),
               response.protocol

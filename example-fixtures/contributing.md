@@ -22,6 +22,8 @@ Please follow this template for documentation:
 ```markdown
 # Using Optic with {API Framework} and {Test Framework}
 **Special thanks to [your_name_or_username](github/you) for documenting this stack
+> > Requires **strategy: ________** in optic.yml
+
 > Tested against {API Framework} {Version} and {Test Framework} {Version} -- {Any Other Compatibility Considerations}
 
 ## Optic Proxy Setup
@@ -42,4 +44,4 @@ What are some stack specific considerations the user needs to be aware of?
 ```
 
 ## Libraries? 
-Try to be clever in how you integrate Optic into a stack. We think it's best to aim for short <50 LOC test fixtures that are easy to copy/paste into a codebase. If a stack is going to require a dedicated Optic library, we're willing to pitch in as a financial backer of the project. Email support@useoptic.com and we can get a project like that moving. 
+Try to be clever in how you integrate Optic into a stack. We think it's best to aim for short <100 LOC test fixtures that are easy to copy/paste into a codebase. If a stack is going to require a dedicated Optic library, we're willing to pitch in as a financial backer of the project. Email support@useoptic.com and we can get a project like that moving. 

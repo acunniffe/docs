@@ -6,7 +6,7 @@ Optic is a CLI tool that runs your API Tests through a local proxy server. By ob
 
 1. Install Optic CLI globally using an up-to-date version of NPM  
 ```bash
-npm install optic-cli -g
+npm install @useoptic/cli -g
 ```
 
 ### Download the Example Project
@@ -29,80 +29,42 @@ npm run test
 For every API you want Optic to document you'll need to create an `optic.yml` file. The example project already includes one, but it's helpful to review it before proceeding further. 
 
 ```yaml
-# The name of the project
-name: Example Project
+strategy:
+  type: proxy
+  # The command that runs our tests
+  commandToRun: npm run test
+  # The host and port of the Mock API Server during testing
+  targetHost: localhost
+  targetPort: 3005
 
-# Explains how Optic can run the API tests
-test: npm run test
+api:
+  # The name of the API on Optic
+  id: example-app
+  security:
+    - type: bearer
+  # The paths you'd like Optic to document
+  paths:
+    - /users
+    - /users/login
+    - /users/:userId/followers
 
-# The host and port of the Mock API Server during testing
-host: localhost
-port: 3005
-
-# The paths you'd like Optic to document
-paths:
-  - /users
-  - /users/login
-  - /users/:userId/followers
 ``` 
 
-### Document the API Spec
-5. Run `optic spec` from the root directory of the API (same directory as the optic.yml file). This command will run your tests, analyse the API and output the Spec to stdout. 
+### Document the API Contract
+5. Run `optic api:document` from the root directory of the API (same directory as the optic.yml file).
 
 ```bash
-testuser$ optic spec
-All Tests Passed! Analysis Complete!
-Documented 3 endpoints from 10 tests in 1.905 seconds
-
------- post /users/login ------
-method:         post
-url:            /users/login
-body: 
-  contentType: application/json
-  schema: 
-    $schema:    http://json-schema.org/draft-04/schema#
-    type:       object
-    properties: 
-      username: 
-        type: string
-      password: 
-        type: string
-responses: 
-  - 
-    status:      200
-    headers: 
-      (empty array)
-    contentType: application/json
-    schema: 
-      $schema:    http://json-schema.org/draft-04/schema#
-      type:       object
-      properties: 
-        userId: 
-          type: string
-        jwt: 
-          type: string
-  - 
-    status:      401
-    headers: 
-      (empty array)
-    contentType: text/plain
-    schema: 
-      $schema: http://json-schema.org/draft-04/schema#
-      type:    string
-
-
------- post /users ------
-[excluded for brevity]
------- post /users/:userId/followers ------
-[excluded for brevity]
-
+testuser$ optic api:document
+Collecting API Interactions:...
+I documented 4 endpoints by observing 11 requests!
+Generating reports...... Done!
 ``` 
 
 ### Uploading to Optic 
-We recommend uploading your specs to the Optic Webapp. 
+We recommend uploading your API contracts to the Optic Webapp. 
 - We provide a rich GUI for your automatically generated docs 
+- The ability to share API Contracts with your entire team. We offer a granular permissions on a per/user, per/api basis.  
 - An automated pipeline to generate client SDKs for the API
-- The ability to share API Specs with your entire team. We offer a granular permissions on a per/user, per/api basis.  
 - API search functionality 
 - An automatically generated API changelog 
 
@@ -124,9 +86,8 @@ Generate a new token or copy one from useoptic.com. Navigating to account page n
 
 #### Publishing API Spec to Optic
 1. Click on **Projects** in the navigation bar
-2. Click **Add API** and create an API named "Example Project" (same as 'name' in the optic.yml)
-3. Run `optic publish` to run tests and upload the API Spec to Optic. When the tests complete a new browser window will open and navigate to the API Console in the webapp. 
-
+2. Click **Add API** and create an API named "example-api" (same as 'name' in the optic.yml)
+3. Run `optic api:publish` to run tests and upload the API Spec to Optic. When the tests complete a new browser window will open and navigate to the API Console in the webapp. 
 
 ## Next Steps
 Nice work! You just learned how to automatically document APIs with Optic. Now it's time to try it with your own code. Here are the next docs you should take a look at: 

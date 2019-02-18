@@ -1,24 +1,29 @@
 # Authentication
-To setup authentication for your API, you just need to add an entry to your 'optic.yml' file. 
+To setup authentication for your API, you just need to add a security entry to your 'optic.yml' file. 
 
-Today we support the following types of authentication:
+We currently support the following types of authentication:
 - HTTP Basic (Authorization header with credentials)
-```
-authentication: basic
+```yaml
+api: 
+  security:
+    - type: basic
 ```
 - HTTP Bearer (Authorization header with bearer token)
-```
-authentication: bearer
+```yaml
+api: 
+  security:
+    - type: bearer
 ```
 - API Key (An API key from a cookie, header, or query parameter)
-```
-authentication:
-  - type: apiKey
-  - in: cookie    #query, header or cookie
-  - name: token
+```yaml
+api: 
+  security:
+    - type: apiKey
+      in: query
+      name: api-token
 ```
 
 Email use at support@useoptic.com if you need us to include another form.
  
 ## How Endpoints are marked as Protected
-Once you've configured your authentication scheme, Optic will automatically mark your authenticated endpoints in the API Spec. The inference is based off of the known properties of each authentication type. So if you have API Key authentication backed by a query parameter called token, all endpoints that include a query parameter called token will be marked as authenticated. 
+Once you've configured your authentication scheme, Optic will automatically mark your authenticated endpoints in the API Spec. The inference is based off of the known properties of each authentication type. So if you use API Key authentication backed by a query parameter called token, all endpoints that include a query parameter called token will be marked as authenticated with that security scheme. 
