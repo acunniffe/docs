@@ -1,4 +1,4 @@
-# Using Optic with Rails/Rack Application
+# Using Optic with Python/Flask Application
 
 > Requires **strategy: logging** in optic.yml
 
