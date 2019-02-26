@@ -14,3 +14,5 @@
     - [Akka HTTP - Route TestKit](example-fixtures/scala/akka-http/routetestkit.md)
   - Ruby
     - [Rails/Rack - All Testing Frameworks](example-fixtures/ruby/using-rack.md)
+  - Python
+    - [Flask - All Testing Frameworks](example-fixtures/python/using-flask.md)

@@ -8,7 +8,8 @@
 Rails projects or those built on top of [Rack](https://rack.github.io/) are easy to connect to Optic using our custom middleware. In this tutorial we'll show you how to connect the Optic Documenting Middleware to your Rack API so that your integration tests document your code as they execute. 
 
 ## Add the Middleware to your Project
-Create a new file called `optic_documenting_middleware.rb` and copy in the code below. The middleware will log each request/response that passes through the API to your local version of Optic. 
+Create a new file called `optic_documenting_middleware.rb` and copy in the code below. The middleware will log each request/response that hits the API during testing, and send them to your local Optic instance. 
+
 
 ```ruby
 require 'puma/configuration'
