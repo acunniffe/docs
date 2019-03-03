@@ -30,13 +30,9 @@ For every API you want Optic to document you'll need to create an `optic.yml` fi
 
 ```yaml
 strategy:
-  type: proxy
+  type: logging
   # The command that runs our tests
   commandToRun: npm run test
-  # The host and port of the Mock API Server during testing
-  targetHost: localhost
-  targetPort: 3005
-
 api:
   # The name of the API on Optic
   id: example-app
