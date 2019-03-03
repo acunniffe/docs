@@ -56,9 +56,32 @@ There's a list of [fixtures built for popular stacks by our community here](/exa
 
 ## How Optic Works
 Optic provides two distinct strategies for documenting your API Contract through tests. The internals of your test framework will determine which one you should use: 
- 
-1. Proxy strategy -- redirects test traffic through a local proxy server which collects each request/response. This strategy is used for test frameworks that bind your API to a local port and runs mock tests against them. 
-2. Logging strategy -- logs each request and response using some kind of middleware. This strategy is used for test frameworks that inject mock requests directly into routers without hitting the network.   
+
+1. Logging strategy -- logs each request and response using some kind of middleware. This strategy is used for test frameworks that inject mock requests directly into routers without hitting the network.    
+2. Proxy strategy -- redirects test traffic through a local proxy server which collects each request/response. This strategy is used for test frameworks that bind your API to a local port and runs mock tests against them. 
+
+### Logging Strategy
+When using this strategy, Optic binds to two ports, one to log requests, and one to log responses. You'll need to setup the simple flow outlined below to log each request/response pair to Optic.  
+
+- Apply custom middleware to your test framework that will forward each request to the **Request Logger** (localhost:30334). 
+- The **Request Logger** will respond with an `interactionId` in the body. 
+- Run the request through your app's router and save the response.
+- Use the **Response Logger** (localhost:30335) to save the response by calling `POST localhost:30335/interactions/{interactionId}/status/{response.statusCode}`. In that request include the headers, and body returned by your server. Optic associates the response to the request you sent the **Request Logger** by using the `interactionId`. 
+- Pass the request and response on to the next middleware
+
+Here are some examples of this flow implemented in two popular frameworks: 
+- [Akka HTTP](example-fixtures/akka-http/using-akka-http.md)
+- [Express](example-fixtures/express/using-express-js.md)
+- [Flask](example-fixtures/flask/using-flask.md)
+- [Rails](example-fixtures/rails/using-rails.md)
+
+#### Using the Logging Strategy  
+To use the logging strategy setup a test fixture like those described in the previous section and change your `optic.yml` file to set `strategy` to `logging`.  
+```yaml
+strategy: 
+  - type: logging
+```
+
 
 ### Proxy Strategy
 When using this strategy, a local proxy server is setup to forward request from your tests to your mock API. The proxy logs the request/response of every interaction with your API and uses that real-world data to document the API. 
@@ -74,26 +97,6 @@ port: 3001
 ```
 
 When your mock API responds, Optic will log the response and send it back as the response to the original request.  
-
-### Logging Strategy
-When using this strategy, Optic binds to two ports, one to log requests, and one to log responses. You'll need to setup the simple flow outlined below to log each request/response pair to Optic.  
-
-- Apply custom middleware to your test framework that will forward each request to the **Request Logger** (localhost:30334). 
-- The **Request Logger** will respond with an `interactionId` in the body. 
-- Run the request through your app's router and save the response.
-- Use the **Response Logger** (localhost:30335) to save the response by calling `POST localhost:30335/interactions/{interactionId}/status/{response.statusCode}`. In that request include the headers, and body returned by your server. Optic associates the response to the request you sent the **Request Logger** by using the `interactionId`. 
-- Pass the request and response on to the next middleware
-
-Here are some examples of this flow implemented in two popular frameworks: 
-- [Akka HTTP](/example-fixtures/scala/akka-http/routetestkit.md)
-- [Rails/Rack](/example-fixtures/ruby/using-rack.md)
-
-#### Using the Logging Strategy  
-To use the logging strategy setup a test fixture like those described in the previous section and change your `optic.yml` file to set `strategy` to `logging`.  
-```yaml
-strategy: 
-  - type: logging
-```
 
 ## Support
 If you need help getting your tests connected to Optic, reach out to us on Drift (bottom right of the screen) or email support@useoptic.com.

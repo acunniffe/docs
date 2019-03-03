@@ -1,4 +1,4 @@
-# Using Optic with Akka HTTP & Route TestKit
+# Using Optic with Akka HTTP
 > Requires **strategy: logging** in optic.yml
 
 > Tested against [Akka HTTP](https://doc.akka.io/docs/akka-http/current/) 10.x.x
@@ -11,7 +11,7 @@ it("/hello responds with 'World!'") {
     }
 }
 ```
-Route TestKit doesn't actually stand up a mock server, instead it injects mock requests directly into the Route handlers. So instead of using the Optic proxy, we need to collect the request + response for each test we run and forward them to Optic. Akka's [Logging Directives](https://doc.akka.io/docs/akka-http/current/routing-dsl/directives/debugging-directives/logRequest.html) make it easy to create a simple test fixture that does just that.
+We need to collect the request + response for each test we run and forward them to Optic. Akka's [Logging Directives](https://doc.akka.io/docs/akka-http/current/routing-dsl/directives/debugging-directives/logRequest.html) make it easy to create a simple test fixture that does just that.
 
 ## Proxy Fixture
 Add a new file in your `test/scala` folder called `OpticFixture.scala`. We suggest using `com/useoptic/akkahttp` to separate it from your code.

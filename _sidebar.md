@@ -8,11 +8,7 @@
   
 - [**Example Test Fixtures**](example-fixtures/index.md)
   - [Contributing Example Fixtures](example-fixtures/contributing.md)
-  - Node JS
-    - [Express - Supertest](example-fixtures/node/express-js/supertest.md)
-  - Scala
-    - [Akka HTTP - Route TestKit](example-fixtures/scala/akka-http/routetestkit.md)
-  - Ruby
-    - [Rails/Rack - All Testing Frameworks](example-fixtures/ruby/using-rack.md)
-  - Python
-    - [Flask - All Testing Frameworks](example-fixtures/python/using-flask.md)
+      - [Akka HTTP](example-fixtures/akka-http/using-akka-http.md)
+      - [Express](example-fixtures/express/using-express-js.md)
+      - [Flask](example-fixtures/flask/using-flask.md)
+      - [Rails](example-fixtures/rails/using-rails.md)

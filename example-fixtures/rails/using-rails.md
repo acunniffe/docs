@@ -1,4 +1,4 @@
-# Using Optic with Rails/Rack Application
+# Using Optic with Rails Application
 
 > Requires **strategy: logging** in optic.yml
 
@@ -116,5 +116,5 @@ The Documenting middleware will document all the requests/responses that your te
 
 ### Next Steps
 1. [Create an API Project](setup/adding-apis.md)
-2. Make sure you've [setup an `optic.yaml` file](setup/project-setup.md)
+2. Make sure you've [setup an `optic.yml` file](setup/project-setup.md)
 3. [Publish an API Snapshot](setup/publishing-snapshots.md)
