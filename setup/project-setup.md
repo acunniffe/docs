@@ -8,17 +8,18 @@ Here's an example of an 'optic.yml' file:
 # If using the Logging Strategy
 strategy:
   type: logging
-  commandToRun: sbt test # The command used to execute the API tests
+  commandToRun: sbt test  # The command used to execute the API tests
   
 # If using the proxy Strategy
 strategy:
   type: proxy
-  targetHost: localhost # The host of your mock API
-  targetPort: 3005 # The port of your mock API
-  commandToRun: sbt test # The command used to execute the API tests 
+  targetHost: localhost   # The host of your mock API
+  targetPort: 3005        # The port of your mock API
+  commandToRun: sbt test  # The command used to execute the API tests 
 
 api:
-  id: api-slug # The name of your Optic project team/api for team projects. 
+  id: api-slug   # The name of your Optic project team/api for team projects.
+  version: 0.1.0 # The semantic version of the API 
   paths:
     - /users
     - /users/login

@@ -6,6 +6,9 @@
   - [Publishing Snapshots](setup/publishing-snapshots.md)
   - [Authentication Schemes](setup/authentication.md)
   
+- **Using API Dependencies**
+  - [Adding API Dependencies](consuming/api-dependencies.md)
+  
 - [**Example Test Fixtures**](example-fixtures/index.md)
   - [Contributing Example Fixtures](example-fixtures/contributing.md)
       - [Akka HTTP](example-fixtures/akka-http/using-akka-http.md)

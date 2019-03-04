@@ -36,6 +36,7 @@ strategy:
 api:
   # The name of the API on Optic
   id: example-app
+  version: 0.1.0
   security:
     - type: bearer
   # The paths you'd like Optic to document
