@@ -98,7 +98,7 @@ end
 ### Making the Middleware Run During Testing
 Now add the middleware to your Rack configuration, in a Rails app it's best to do this in `config/enviroments/test.rb` so the middleware is only used during testing. 
 
-> NOTE: If you use multiple middlewares, make sure the Documenting Middleware is added at the bottom of the stack so the documentation is accurate. In most cases putting it last in your configuration file is sufficient. 
+> Note: If you use multiple middlewares, make sure the Documenting Middleware is added at the bottom of the stack so the documentation is accurate. In most cases putting it last in your configuration file is sufficient. 
 
 ```ruby
 Rails.application.configure do {
@@ -110,6 +110,8 @@ Rails.application.configure do {
   end
 }
 ``` 
+
+> Note for RSpec users: Optic will only document specs of type :request since only integration tests contain enough data to generate REST docs. Specs of type :controller skip the Rack stack so documentation generated from them would be incomplete.  
 
 ## Using the Proxy Fixture
 The Documenting middleware will document all the requests/responses that your tests run. Since it is integrated at the middleware level there's no need to update any of your tests files or fixtures. 
