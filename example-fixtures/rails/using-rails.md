@@ -79,7 +79,10 @@ module OpticTestFixture
       logging_response = Net::HTTP.const_get("Post").new("/interactions/" + interactionId + "/status/" + resStatus.to_s)
       addHeaders(resHeaders, logging_response)
       if logging_response.request_body_permitted? && resBody
-        bodyData = resBody.body()
+        bodyData = ""
+        resBody.each do |line|
+          bodyData << line
+        end
         logging_response.body = bodyData
         logging_response.content_length = bodyData.bytesize.to_s
       end
