@@ -1,5 +1,4 @@
 # Using Optic with Akka HTTP
-> Requires **strategy: logging** in optic.yml
 
 > Tested against [Akka HTTP](https://doc.akka.io/docs/akka-http/current/) 10.x.x
 ## Optic Proxy Setup

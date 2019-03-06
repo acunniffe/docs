@@ -1,7 +1,5 @@
 # Using Optic with Flask
 
-> Requires **strategy: logging** in optic.yml
-
 > Tested against [Flask](http://flask.pocoo.org/) 1.*
 
 ## Optic Proxy Setup

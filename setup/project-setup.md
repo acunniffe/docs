@@ -5,17 +5,9 @@ Here's an example of an 'optic.yml' file:
 
 ```yaml
 
-# If using the Logging Strategy
 strategy:
   type: logging
   commandToRun: sbt test  # The command used to execute the API tests
-  
-# If using the proxy Strategy
-strategy:
-  type: proxy
-  targetHost: localhost   # The host of your mock API
-  targetPort: 3005        # The port of your mock API
-  commandToRun: sbt test  # The command used to execute the API tests 
 
 api:
   id: api-slug   # The name of your Optic project team/api for team projects.

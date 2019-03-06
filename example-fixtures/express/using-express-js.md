@@ -1,7 +1,5 @@
 # Using Optic with Express JS
 
-> Requires **strategy: logging** in optic.yml
-
 > Tested against [Express](https://expressjs.com/) 4.x
 
 ## Optic Setup
@@ -9,6 +7,8 @@ You can use Optic to document any Express JS App written in JavaScript, TypeScri
 ```bash
 npm install @useoptic/document-express --save-dev
 ``` 
+
+If you'd like to review the source for this package, it's [available on our GitHub](https://github.com/opticdev/node-express-fixture). If you have any problems getting it working please open an issue or make a PR. 
 
 To use add the middleware, just wrap your `app` in `withOptic`. The `withOptic` function will only apply our middleware to your API if you are running your tests through `optic api:document`. 
 
