@@ -1,6 +1,13 @@
 version: 0.2
 
+phases:
+  build:
+    commands:
+      - echo "starting build..."
+      - npm install
+      - npm run build
 artifacts:
   discard-paths: no
+  base-directory: 'build'
   files:
     - '**/*'
