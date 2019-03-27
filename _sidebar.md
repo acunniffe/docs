@@ -8,10 +8,3 @@
   
 - **Using API Dependencies**
   - [Adding API Dependencies](consuming/api-dependencies.md)
-  
-- [**Example Test Fixtures**](example-fixtures/index.md)
-  - [Contributing Example Fixtures](example-fixtures/contributing.md)
-      - [Akka HTTP](example-fixtures/akka-http/using-akka-http.md)
-      - [Express](example-fixtures/express/using-express-js.md)
-      - [Flask](example-fixtures/flask/using-flask.md)
-      - [Rails](example-fixtures/rails/using-rails.md)
