@@ -7,6 +7,7 @@ const path = require('path')
 const tocGenerator = require('./templates/sdk-toc')
 const navbarGenerator = require('./templates/sdk-navbar-toc')
 
+const docsProdPath = 'https://docs.useoptic.com/#/'
 const buildDir = path.join(__dirname, 'build')
 
 //Clean and Create build directory
@@ -51,6 +52,10 @@ getJson(manifestUrl, (err, manifest) => {
 		docs.forEach(sdk => {
 			fs.write(sdk.fileName, sdk.readme)
 		})
+
+		fs.write(path.join(buildDir, 'integrations_docs.json'), JSON.stringify(docs.map(i => {
+			return {link: docsProdPath + i.fileName.replace(__dirname+'/build/', ''), name: i.name}
+		})))
 
 	}).catch((err) => {
 		console.error(err)
