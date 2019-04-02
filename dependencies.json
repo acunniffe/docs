@@ -1,4 +1,6 @@
 {
-  "ingestionCommit": "6a6cb31",
-  "ingestionRepo": "https://raw.githubusercontent.com/opticdev/api-ingestion"
+  "ingestionCommit": "0d36e9d",
+  "ingestionRepo": "https://raw.githubusercontent.com/opticdev/api-ingestion",
+  "contributingDocs": "Contributing.md"
+
 }

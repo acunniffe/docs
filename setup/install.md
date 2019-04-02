@@ -1,23 +1,19 @@
 # Installing Optic
-To start using Optic you need to install the CLI from NPM.
+To start, install our CLI from NPM.
 
 ```bash
 npm install @useoptic/cli -g
 ``` 
 
-### What am I Installing?
-- A local version of the Optic proxy server 
-- Our CLI tool will be installed as 'optic'
+### What am I Installing? 
+- The Optic documenting CLI that runs your API tests to document your code 
 
-## Authorizing the CLI
+
+## Logging in from the CLI
 You will need to authorize the CLI to interact with your Optic Account. 
 
-1. First navigate to the **Account** page 
-2. Expand the **API Tokens** panel
-3. Click **+ Generate New Token**
-4. Add your new token to the CLI
 ```bash
-optic credentials:add-token
+optic auth:login
 What is your Optic API token?: <paste-token-here>
 ``` 
 

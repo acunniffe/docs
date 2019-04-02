@@ -1,5 +1,5 @@
 const getJson = require('get-json');
-const {ingestionCommit, ingestionRepo} = require('./dependencies');
+const {ingestionCommit, ingestionRepo, contributingDocs} = require('./dependencies');
 const rp = require('request-promise');
 const manifestUrl = `${ingestionRepo}/${ingestionCommit}/manifest.json`;
 const fs = require('fs-sync');
@@ -47,6 +47,11 @@ getJson(manifestUrl, (err, manifest) => {
 		fs.write(path.join(buildDir, 'example-fixtures', 'index.md'), tocGenerator(docs, __dirname))
 		//add to navigation
 		fs.write(path.join(buildDir, '_sidebar.md'), navbarGenerator(docs, fs.read(path.join(buildDir, '_sidebar.md')), __dirname))
+
+
+		rp(docUrl(contributingDocs)).then((body) => {
+			fs.write(path.join(buildDir, 'example-fixtures', 'contributing.md') ,body)
+		})
 
 		//add each individual doc readme
 		docs.forEach(sdk => {

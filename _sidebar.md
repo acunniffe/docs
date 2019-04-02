@@ -6,5 +6,3 @@
   - [Publishing Snapshots](setup/publishing-snapshots.md)
   - [Authentication Schemes](setup/authentication.md)
   
-- **Using API Dependencies**
-  - [Adding API Dependencies](consuming/api-dependencies.md)
