@@ -15,5 +15,6 @@ Optic learns an API's contract by running your tests and observing how the API b
 ### Get Started
 - [Installation](setup/install.md)
 - [Integrating Optic](setup/integrating.md)
+- [Setup optic.yml](setup/optic-yml.md)
 - [Testing Guidelines](setup/testing-guidelines.md)
 - [Documenting APIs](usage/documenting.md)
