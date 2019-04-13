@@ -58,6 +58,7 @@ getJson(manifestUrl, (err, manifest) => {
 			fs.write(sdk.fileName, sdk.readme)
 		})
 
+		//creates the integration_docs.json for websites to reference
 		fs.write(path.join(buildDir, 'integrations_docs.json'), JSON.stringify(docs.map(i => {
 			return {link: docsProdPath + i.fileName.replace(__dirname+'/build/', ''), name: i.name}
 		})))
