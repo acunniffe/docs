@@ -8,6 +8,7 @@ const tocGenerator = require('./templates/sdk-toc')
 const navbarGenerator = require('./templates/sdk-navbar-toc')
 
 const docsProdPath = 'https://docs.useoptic.com/#/'
+const rawProdPath = 'https://s3.amazonaws.com/current-optic-docs-website/'
 const buildDir = path.join(__dirname, 'build')
 
 //Clean and Create build directory
@@ -60,7 +61,12 @@ getJson(manifestUrl, (err, manifest) => {
 
 		//creates the integration_docs.json for websites to reference
 		fs.write(path.join(buildDir, 'integrations_docs.json'), JSON.stringify(docs.map(i => {
-			return {link: docsProdPath + i.fileName.replace(__dirname+'/build/', ''), name: i.name}
+			const path = i.fileName.replace(__dirname+'/build/', '')
+			return {
+				link: docsProdPath + path,
+				raw: rawProdPath   + path,
+				name: i.name
+			}
 		})))
 
 	}).catch((err) => {
