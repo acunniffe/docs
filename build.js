@@ -41,7 +41,7 @@ getJson(manifestUrl, (err, manifest) => {
 
 		return rp(docs)
 			.then(readme => {
-				return {...value, readme, fileName};
+				return {...value, readme, fileName, slug: key};
 			});
 	})).then(docs => {
 		//add a toc
@@ -65,6 +65,7 @@ getJson(manifestUrl, (err, manifest) => {
 			return {
 				link: docsProdPath + path,
 				raw: rawProdPath   + path,
+				slug: i.slug,
 				name: i.name
 			}
 		})))
